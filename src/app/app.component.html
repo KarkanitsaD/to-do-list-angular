@@ -1,0 +1,38 @@
+<div>
+  <div class="content">
+    <mat-tab-group mat-align-tabs="center" color="accent">
+      <mat-tab label="Created">
+        <div *ngFor="let item of createdItems$ | async">
+          <app-to-do-item-created [toDoItem]="item">
+          </app-to-do-item-created>
+        </div>
+        <div class="add-item-container">
+          <textarea #text
+                    matInput
+                    [value]="null"
+                    placeholder="Enter text"
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5">
+          </textarea>
+          <br>
+          <button mat-flat-button color="accent" (click)="onAddToDoItem(text)">
+            Add to do item
+          </button>
+        </div>
+      </mat-tab>
+      <mat-tab label="Completed">
+        <div *ngFor="let item of completedItems$ | async">
+          <app-to-do-item-completed [toDoItem]="item">
+          </app-to-do-item-completed>
+        </div>
+      </mat-tab>
+      <mat-tab label="Removed">
+        <div *ngFor="let item of removedItems$ | async">
+          <app-to-do-item-created [toDoItem]="item">
+          </app-to-do-item-created>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
