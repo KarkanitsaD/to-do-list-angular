@@ -1,5 +1,6 @@
 import {createAction, props} from "@ngrx/store";
 import {ToDoItemModel} from "../../domain/models/to-do-item.model";
+import {Update} from "@ngrx/entity";
 
 export const setToDoItems = createAction(
   '[TODO] set to do items',
@@ -13,6 +14,11 @@ export const clearToDoItems = createAction(
 export const addToDoItem = createAction(
   '[TODO] add to do item',
   props<{toDoItem: ToDoItemModel}>()
+);
+
+export const updateToDoItem = createAction(
+  '[TODO] update to do item',
+  props<{update: Update<ToDoItemModel>}>()
 );
 
 export const markItemAsCompleted = createAction(
