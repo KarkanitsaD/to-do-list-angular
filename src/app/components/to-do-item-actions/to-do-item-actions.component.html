@@ -3,21 +3,24 @@
     class="completed-back"
     mat-icon-button
     (click)="onCompleteClick.emit()"
-    [disabled]="actionToDisable === 1">
+    [disabled]="actionToDisable === 1"
+    title="mark as completed">
     <mat-icon>task_alt</mat-icon>
   </button>
   <button
     class="removed-back"
     style="margin: 0 5px 0 5px"
     mat-icon-button (click)="onDeleteClick.emit()"
-    [disabled]="actionToDisable === 2">
+    [disabled]="actionToDisable === 2"
+    title="remove">
     <mat-icon>delete</mat-icon>
   </button>
   <button
     class="created-back"
     mat-icon-button
     (click)="onRefreshClick.emit()"
-    [disabled]="actionToDisable === 0">
+    [disabled]="actionToDisable === 0"
+    title="mark as created">
     <mat-icon>published_with_changes</mat-icon>
   </button>
 </div>

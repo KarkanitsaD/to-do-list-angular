@@ -3,7 +3,7 @@ import {Store} from "@ngrx/store";
 import {ApplicationStore} from "./store/store";
 import {completedItems, createdItems, removedItems, selectAllItems} from "./store/to-do/to-do.selectors";
 import {ToDoItemModel, ToDoItemStatus} from "./domain/models/to-do-item.model";
-import {addToDoItem, setToDoItems} from "./store/to-do/to-do.actions";
+import {addToDoItem, clearToDoItems, setToDoItems} from "./store/to-do/to-do.actions";
 import {ToDoItemService} from "./domain/services/to-do-item.service";
 import {take} from "rxjs/operators";
 
@@ -44,5 +44,9 @@ export class AppComponent implements OnInit {
     this.store$.select(selectAllItems).pipe(take(1)).subscribe(data => {
       this.toDoItemService.saveToDoState(data);
     });
+  }
+
+  public removeAllItems(): void {
+    this.store$.dispatch(clearToDoItems());
   }
 }

@@ -2,9 +2,17 @@
   <div class="content">
     <button
       (click)="saveState()"
-      mat-button
-      class="save-button">
+      mat-flat-button
+      class="action-button"
+      color="accent">
       Save state
+    </button>
+    <button
+      (click)="removeAllItems()"
+      mat-flat-button
+      class="action-button"
+      color="warn">
+      Clean list
     </button>
     <mat-tab-group mat-align-tabs="center" color="accent">
       <mat-tab label="Created">
