@@ -1,0 +1,29 @@
+.main {
+
+}
+
+.content {
+  margin: 0 auto;
+  width: 600px;
+}
+
+.add-item-container {
+  margin: 5px;
+}
+
+textarea {
+  font-size: 20px;
+  width: 400px;
+}
+
+.save-button {
+  width: 600px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.list-container {
+  max-height: 600px;
+  overflow: auto;
+}
