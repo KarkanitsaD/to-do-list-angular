@@ -1,10 +1,18 @@
 <div>
   <div class="content">
+    <button
+      (click)="saveState()"
+      mat-button
+      class="save-button">
+      Save state
+    </button>
     <mat-tab-group mat-align-tabs="center" color="accent">
       <mat-tab label="Created">
-        <div *ngFor="let item of createdItems$ | async">
-          <app-to-do-item-created [toDoItem]="item">
-          </app-to-do-item-created>
+        <div class="list-container">
+          <div *ngFor="let item of createdItems$ | async">
+            <app-to-do-item-created [toDoItem]="item">
+            </app-to-do-item-created>
+          </div>
         </div>
         <div class="add-item-container">
           <textarea #text
@@ -22,15 +30,19 @@
         </div>
       </mat-tab>
       <mat-tab label="Completed">
-        <div *ngFor="let item of completedItems$ | async">
-          <app-to-do-item-completed [toDoItem]="item">
-          </app-to-do-item-completed>
+        <div class="list-container">
+          <div *ngFor="let item of completedItems$ | async">
+            <app-to-do-item-completed [toDoItem]="item">
+            </app-to-do-item-completed>
+          </div>
         </div>
       </mat-tab>
       <mat-tab label="Removed">
-        <div *ngFor="let item of removedItems$ | async">
-          <app-to-do-item-created [toDoItem]="item">
-          </app-to-do-item-created>
+        <div class="list-container">
+          <div *ngFor="let item of removedItems$ | async">
+            <app-to-do-item-removed [toDoItem]="item">
+            </app-to-do-item-removed>
+          </div>
         </div>
       </mat-tab>
     </mat-tab-group>
