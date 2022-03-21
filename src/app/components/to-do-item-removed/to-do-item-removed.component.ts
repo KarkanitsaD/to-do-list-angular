@@ -1,8 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ToDoItemModel} from "../../domain/models/to-do-item.model";
+import {ToDoItemModel, ToDoItemStatus} from "../../domain/models/to-do-item.model";
 import {Store} from "@ngrx/store";
 import {ApplicationStore} from "../../store/store";
-import {markItemAsCompleted, markItemAsCreated, markItemAsRemoved} from "../../store/to-do/to-do.actions";
+import {
+  markItemAsCompleted,
+  markItemAsCreated,
+  markItemAsRemoved,
+  updateToDoItem
+} from "../../store/to-do/to-do.actions";
+import {Update} from "@ngrx/entity";
 
 @Component({
   selector: 'app-to-do-item-removed',
@@ -22,11 +28,30 @@ export class ToDoItemRemovedComponent implements OnInit {
   }
 
   markAsCompleted(): void {
-    this.store$.dispatch(markItemAsCompleted({id: this.toDoItem.id}));
+    let item: ToDoItemModel = {
+      ...this.toDoItem,
+      status: ToDoItemStatus.Completed
+    };
+
+    const update: Update<ToDoItemModel> = {
+      id: item.id,
+      changes: item
+    };
+
+    this.store$.dispatch(updateToDoItem({update: update}));
   }
 
   markAsCreated(): void {
-    this.store$.dispatch(markItemAsCreated({id: this.toDoItem.id}));
-  }
+    let item: ToDoItemModel = {
+      ...this.toDoItem,
+      status: ToDoItemStatus.Created
+    };
 
+    const update: Update<ToDoItemModel> = {
+      id: item.id,
+      changes: item
+    };
+
+    this.store$.dispatch(updateToDoItem({update: update}));
+  }
 }

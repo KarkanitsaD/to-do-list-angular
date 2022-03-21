@@ -1,11 +1,14 @@
-import {ToDoItemModel, ToDoItemStatus} from "../../domain/models/to-do-item.model";
+import {compareItems, ToDoItemModel} from "../../domain/models/to-do-item.model";
+import {createEntityAdapter, EntityState} from "@ngrx/entity";
 
 export const toDoState = 'toDoState';
 
-export interface ToDoState {
-  toDoItems: ToDoItemModel[]
-}
+export const adapter = createEntityAdapter<ToDoItemModel>({
+  sortComparer: compareItems,
+  selectId: item => item.id
+});
 
-export const initialToDoState: ToDoState = {
-  toDoItems: []
-}
+export interface ToDoState extends EntityState<ToDoItemModel> { }
+
+export const initialToDoState = adapter.getInitialState();
+
