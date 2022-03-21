@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ToDoItemModel} from "../../domain/models/to-do-item.model";
-import {markItemAsCreated, markItemAsRemoved} from "../../store/to-do/to-do.actions";
+import {ToDoItemModel, ToDoItemStatus} from "../../domain/models/to-do-item.model";
+import {markItemAsCreated, markItemAsRemoved, updateToDoItem} from "../../store/to-do/to-do.actions";
 import {Store} from "@ngrx/store";
 import {ApplicationStore} from "../../store/store";
+import {Update} from "@ngrx/entity";
 
 @Component({
   selector: 'app-to-do-item-completed',
@@ -22,10 +23,30 @@ export class ToDoItemCompletedComponent implements OnInit {
   }
 
   markAsRemoved(): void {
-    this.store$.dispatch(markItemAsRemoved({id: this.toDoItem.id}));
+    let item: ToDoItemModel = {
+      ...this.toDoItem,
+      status: ToDoItemStatus.Removed
+    };
+
+    const update: Update<ToDoItemModel> = {
+      id: item.id,
+      changes: item
+    };
+
+    this.store$.dispatch(updateToDoItem({update: update}));
   }
 
   markAsCreated(): void {
-    this.store$.dispatch(markItemAsCreated({id: this.toDoItem.id}));
+    let item: ToDoItemModel = {
+      ...this.toDoItem,
+      status: ToDoItemStatus.Created
+    };
+
+    const update: Update<ToDoItemModel> = {
+      id: item.id,
+      changes: item
+    };
+
+    this.store$.dispatch(updateToDoItem({update: update}));
   }
 }
