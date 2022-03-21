@@ -66,6 +66,9 @@ MIT
 @angular/router
 MIT
 
+@ngrx/entity
+MIT
+
 @ngrx/store
 MIT
 
